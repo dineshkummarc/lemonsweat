@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<title>Crush</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-</head>
-
-<body id="home">
-
-	<h1>Crush</h1>
-	<div style="background-color: #eee;">asd</div>
-	<div style="background-color: #ddd;">asd</div>
-	<div style="background-color: #ddeedd;">asd</div>
-	<div style="background-color: #3ee6aa;">asd</div>
-	<div style="background-color: #e33e99;">asd</div>
-
-</body>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+  <body>
+    <?php if ($this->user) { ?>
+      Your user profile is
+      <pre>
+        <?php print htmlspecialchars(print_r($this->user_profile, true)) ?>
+      </pre>
+    <?php } else { ?>
+      <fb:login-button></fb:login-button>
+    <?php } ?>
+	
+	<!--<?php $this->logInOutButton(); ?>-->
+	
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '<?php echo $this->facebook->getAppID() ?>',
+          cookie: true,
+          xfbml: true,
+          oauth: true
+        });
+        FB.Event.subscribe('auth.login', function(response) {
+          window.location.reload();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+          window.location.reload();
+        });
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+  </body>
 </html>

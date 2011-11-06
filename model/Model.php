@@ -1,10 +1,35 @@
 <?php
-
 #include_once("model/Book.php");
 
-class Model {
-	
+require 'facebook.php';
 
+class Model {
+	public $facebook;
+	public $user;
+	public $user_profile;
+
+	function __construct() {
+        $this->facebook = new Facebook(array(
+			'appId'  => '191577744250793',
+			'secret' => '2ce0aabf76499ec4a168238d1f6e938c',
+		));
+		
+		//$session = $facebook->getSession();
+		
+		$this->user = $this->facebook->getUser();
+		
+		// controller
+		if ($this->user) {
+				try {
+					// Proceed knowing you have a logged in user who's authenticated.
+					$this->user_profile = $this->facebook->api('/me');
+				} catch (FacebookApiException $e) {
+					echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
+					$this->user = null;
+				}
+		}
+    }
+	
 	/*
 	public function getBookList()
 	{
@@ -23,7 +48,5 @@ class Model {
 		$allBooks = $this->getBookList();
 		return $allBooks[$title];
 	}
-	*/
+	*/	
 }
-
-?>
