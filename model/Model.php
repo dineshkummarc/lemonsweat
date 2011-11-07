@@ -2,6 +2,7 @@
 #include_once("model/Book.php");
 
 require 'facebook.php';
+require 'config.php';
 
 class Model {
 	public $facebook;
@@ -10,8 +11,8 @@ class Model {
 
 	function __construct() {
         $this->facebook = new Facebook(array(
-			'appId'  => '191577744250793',
-			'secret' => '2ce0aabf76499ec4a168238d1f6e938c',
+			'appId'  => APPID,
+			'secret' => SECRET,
 		));
 		
 		//$session = $facebook->getSession();

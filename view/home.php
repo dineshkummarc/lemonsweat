@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
   <body>
-    <?php if ($this->user) { ?>
-      Your user profile is
-      <pre>
-        <?php print htmlspecialchars(print_r($this->user_profile, true)) ?>
-      </pre>
-    <?php } else { ?>
-      <fb:login-button></fb:login-button>
-    <?php } ?>
+	<!-- Log in/out -->
+	<?php echo $this->logInOutButton(); ?>
 	
-	<!--<?php $this->logInOutButton(); ?>-->
+	<pre><?php print htmlspecialchars(print_r($this->user_profile, true)) ?></pre>
 	
     <div id="fb-root"></div>
     <script>

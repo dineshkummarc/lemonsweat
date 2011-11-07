@@ -12,17 +12,23 @@ class Controller {
     } 
 	
 	public function logInOutButton() {
-	    if ($this->user) {
-			echo '<pre> htmlspecialchars(print_r($user_profile, true)) </pre>';
+		if ($this->user) {
+		  	$logoutUrl = $this->facebook->getLogoutUrl();
 		} else {
-			echo '<fb:login-button></fb:login-button>';
+		  	$loginUrl = $this->facebook->getLoginUrl();
+		}
+			
+	    if (!$this->user) {
+			return "<fb:login-button></fb:login-button>";
+		} else {
+			return "<a href='" . $logoutUrl . "'>logout</a>";
 		}
 	}
 	
 	public function invoke() {
-		
-		
-		//require("model/temp.php");
+
+				
+		//require("model/Temp.php");
 		
 		include 'view/home.php';
 
