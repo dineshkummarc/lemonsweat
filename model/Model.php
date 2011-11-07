@@ -11,8 +11,8 @@ class Model {
 
 	function __construct() {
         $this->facebook = new Facebook(array(
-			'appId'  => APPID,
-			'secret' => SECRET,
+			'appId'  => CONFIG_APPID,
+			'secret' => CONFIG_SECRET,
 		));
 		
 		//$session = $facebook->getSession();
